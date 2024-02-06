@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import time
-__import__( base_model
+from .. import base_model
 
 
 bm = base_model.BaseModel()
