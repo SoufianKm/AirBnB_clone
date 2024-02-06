@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 import time
-from base_model import BaseModel
+__import__( base_model
 
 
-bm = BaseModel()
+bm = base_model.BaseModel()
 bm.attr1 = 2018
 print(bm)
 print(bm.to_dict())
