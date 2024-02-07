@@ -4,6 +4,7 @@
 
 import uuid
 import datetime
+import models
 
 
 class BaseModel:
@@ -18,7 +19,9 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
+        """
         print("len of kwargs is: ", len(list(kwargs.keys())))
+        """
         if len(list(kwargs.keys())) != 0:
             for k, v in kwargs.items():
                 if k != "__class__":
@@ -29,19 +32,22 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.utcnow()
             self.updated_at = datetime.datetime.utcnow()
+            models.storage.new(self)
 
     def __str__(self):
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
     def save(self):
-        """ updates the instance
-        only updated_at is updated
+        """
+        updates the instance only updated_at is updated
         """
         self.updated_at = datetime.datetime.utcnow()
+        models.storage.save()
 
     def to_dict(self):
-        """ return a dictionary with all the attributes, a class name item
+        """
+        return a dictionary with all the attributes, a class name item
         and dates converted to string format in ISO format
         """
         new_dict = self.__dict__.copy()
