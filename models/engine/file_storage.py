@@ -49,12 +49,15 @@ class FileStorage():
             f.write(json.dumps(new_dict))
 
     def reload(self):
-        """
-        deserializes the JSON file to __objects
-        """
+        """deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, mode='r') as f:
                 dicts = json.load(f)
                 for value in dicts.values():
                     my_obj = BaseModel(**value)
                     self.new(my_obj)
+        except json.decoder.JSONDecodeError:
+            with open(self.__file_path, mode='w') as f:
+                f.write('{}')
+        except PermissionError:
+            raise PermissionError('no read permission on file.json')
