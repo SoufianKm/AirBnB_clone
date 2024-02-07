@@ -1,1 +1,1 @@
-all = ["base_model", "console"]
+all = ["console"]
