@@ -2,10 +2,10 @@
 """ class User """
 
 
-import base_model
+from models.base_model import BaseModel
 
 
-class User(base_model.BaseModel):
+class User(BaseModel):
     """ Class User based on BaseModel """
     email = ""
     password = ""
