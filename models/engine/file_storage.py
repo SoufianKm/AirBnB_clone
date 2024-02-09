@@ -61,3 +61,8 @@ class FileStorage():
                 f.write('{}')
         except PermissionError:
             raise PermissionError('no read permission on file.json')
+
+    def delete(self, key):
+        """deletes one item form __objects"""
+        self.__objects.update({key: "safe delete"})
+        self.__objects.pop(key)
