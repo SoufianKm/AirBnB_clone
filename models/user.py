@@ -2,7 +2,7 @@
 """ class User """
 
 
-from base_model import BaseModel
+import base_model
 
 
 class User(base_model.BaseModel):
