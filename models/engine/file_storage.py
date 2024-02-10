@@ -64,7 +64,7 @@ class FileStorage():
                     class_name = key.split('.')[0]
                     my_obj = eval(class_name)(**value)
                     self.new(my_obj)
-        except json.decoder.JSONDecodeError:
+        except (FileNotFoundError, PermissionError):
             pass
 
     def delete(self, key):
