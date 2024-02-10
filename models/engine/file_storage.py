@@ -5,6 +5,13 @@ FileStorage class module
 import json
 import sys
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage():
@@ -53,8 +60,9 @@ class FileStorage():
         try:
             with open(self.__file_path, mode='r') as f:
                 dicts = json.load(f)
-                for value in dicts.values():
-                    my_obj = BaseModel(**value)
+                for key, value in dicts.items():
+                    class_name = key.split('.')[0]
+                    my_obj = eval(class_name)(**value)
                     self.new(my_obj)
         except json.decoder.JSONDecodeError:
             with open(self.__file_path, mode='w') as f:
