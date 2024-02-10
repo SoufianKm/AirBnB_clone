@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ console """
 
+
 import cmd
 from models.__init__ import storage
 from models.base_model import BaseModel
@@ -16,14 +17,8 @@ class HBNBCommand(cmd.Cmd):
     """our entry point to the command interpreter"""
 
     prompt = '(hbnb) '
-    class_list = [
-            'BaseModel',
-            'User',
-            'City',
-            'Amenity',
-            'Place',
-            'State',
-            'Review']
+    class_list = ['Base\
+Model', 'User', 'City', 'Amenity', 'Place', 'State', 'Review']
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -50,12 +45,11 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_show(self, arg):
-        """Print the string representation of an instance\
-based on class and id
-"""
+        """Print the string representation of an instance based on class\
+and id"""
         args = arg.split()
-        length = len(args)
-        match length:
+        lenght = len(args)
+        match lenght:
             case 0:
                 print("** class name missing **")
                 return None
@@ -93,10 +87,8 @@ based on class and id
         storage.save()
 
     def do_all(self, arg):
-        """
-        prints all the instances that belong to a certain
-        class or all 84 the classes
-        """
+        """prints all the instances that belong to a certain class or all\
+84 the classes"""
         args = arg.split()
         lenght = len(args)
         dic = storage.all()
@@ -123,8 +115,7 @@ based on class and id
         print("]")
 
     def do_update(self, arg):
-        """
-        Updates an instance based on the class name and id
+        """Updates an instance based on the class name and id
         Usage: update <class name> <id> <attribute name> \"<attribute value>\"
         """
         dic = storage.all()
@@ -150,20 +141,19 @@ based on class and id
         if lenght == 3:
             print("** value missing **")
             return None
-        obj = dic["{}.{}".format(args[0], args[1])]
+        instance = dic["{}.{}".format(args[0], args[1])]
         # leave id, created_at and updated_at untouched
         if args[2] in ('id', 'created_at', 'updated_at'):
             return None
-        if args[2] not in obj.__dict__.keys():
-            obj.__dict__[args[2]] = args[3]
+        if args[2] not in instance.__dict__.keys():
+            instance.__dict__[args[2]] = args[3]
         else:
-            obj.__dict__[args[2]] = type(obj.__dict__[args[2]])(args[3])
-        # leave storage untouched if type fails
-        # or we try to change main attrs
-        if obj is None:
+            instance.__dict__[args[2]] = type(instance.__dict__[args[2]])(args[3])
+        # leave storage untouched if type fails or we try to change main attrs
+        if instance is None:
             return None
         storage.delete("{}.{}".format(args[0], args[1]))
-        storage.new(obj)
+        storage.new(instance)
         storage.save()
 
 
