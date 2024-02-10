@@ -3,6 +3,7 @@
 
 
 import cmd
+import datetime
 from models.__init__ import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -148,10 +149,12 @@ and id"""
         if args[2] not in instance.__dict__.keys():
             instance.__dict__[args[2]] = args[3]
         else:
-            instance.__dict__[args[2]] = type(instance.__dict__[args[2]])(args[3])
+            instance.__dict__[args[2]] = type(instance.
+                                              __dict__[args[2]])(args[3])
         # leave storage untouched if type fails or we try to change main attrs
         if instance is None:
             return None
+        instance.updated_at = datetime.datetime.utcnow()
         storage.delete("{}.{}".format(args[0], args[1]))
         storage.new(instance)
         storage.save()

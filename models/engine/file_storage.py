@@ -65,10 +65,7 @@ class FileStorage():
                     my_obj = eval(class_name)(**value)
                     self.new(my_obj)
         except json.decoder.JSONDecodeError:
-            with open(self.__file_path, mode='w') as f:
-                f.write('{}')
-        except PermissionError:
-            raise PermissionError('no read permission on file.json')
+            pass
 
     def delete(self, key):
         """deletes one item form __objects"""

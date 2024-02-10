@@ -20,7 +20,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """
-        print("len of kwargs is: ", len(list(kwargs.keys())))
+        Constructor of the class BaseModel
         """
         if len(list(kwargs.keys())) != 0:
             for k, v in kwargs.items():
