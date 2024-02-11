@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 import pycodestyle
 
 
-class Test_syntax(TestCases):
+class Test_syntax(TestCase):
     """
     Test the pycodestyle and syntax requirements
     for the `User` class
