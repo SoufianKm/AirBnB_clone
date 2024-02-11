@@ -3,7 +3,7 @@
 
 
 import uuid
-import datetime
+from datetime import datetime
 import models
 
 
@@ -22,19 +22,29 @@ class BaseModel:
         """
         Constructor of the class BaseModel
         """
-        if len(list(kwargs.keys())) != 0:
-            for k, v in kwargs.items():
-                if k != "__class__":
-                    self.__dict__[k] = v
-            self.created_at = datetime.datetime.fromisoformat(self.created_at)
-            self.updated_at = datetime.datetime.fromisoformat(self.updated_at)
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.today()
+        self.updated_at = datetime.today()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    pass
+                elif key != "created_at" and key != "updated_at":
+                    self.__dict__[key] = value
+                else:
+                    self.__dict__[key] = datetime.strptime(
+                        value, "%Y-%m-%dT%H:%M:%S.%f")
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.utcnow()
-            self.updated_at = datetime.datetime.utcnow()
             models.storage.new(self)
 
     def __str__(self):
+        """
+        print:
+            [<class name>] (<self.id>) <self.__dict__>
+
+        Return:
+            description with the information changed
+        """
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
@@ -42,7 +52,7 @@ class BaseModel:
         """
         updates the instance only updated_at is updated
         """
-        self.updated_at = datetime.datetime.utcnow()
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
@@ -52,6 +62,6 @@ class BaseModel:
         """
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
-        new_dict["updated_at"] = new_dict["updated_at"].isoformat()
-        new_dict["created_at"] = new_dict["created_at"].isoformat()
+        new_dict["updated_at"] = self.created_at.isoformat()
+        new_dict["created_at"] = self.updated_at.isoformat()
         return new_dict
