@@ -31,6 +31,11 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
+    def do_EOF(self, args):
+        """ handling End of file """
+        print()
+        exit()
+
     def emptyline(self):
         """Overwriting the default one"""
         pass
