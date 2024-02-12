@@ -65,7 +65,7 @@ class FileStorage():
                     my_obj = eval(class_name)(**value)
                     self.new(my_obj)
         except (FileNotFoundError, PermissionError):
-            pass
+            return
 
     def delete(self, key):
         """deletes one item form __objects"""
