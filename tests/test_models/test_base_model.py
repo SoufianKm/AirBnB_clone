@@ -4,7 +4,7 @@ Unittest for base_model class
 """
 from datetime import date, datetime
 from unittest import TestCase
-from models import base_model
+from models import base_model.BaseModel
 import uuid
 import pycodestyle
 

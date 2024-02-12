@@ -2,7 +2,7 @@
 """
 Unittest for FileStorage class
 """
-import unittest
+from unittest import TestCase
 import pep8
 import json
 import sys
