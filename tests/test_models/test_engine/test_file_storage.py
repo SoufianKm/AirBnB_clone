@@ -44,8 +44,8 @@ class Test_File_Storage(TestCase):
         and __objects to default values 'file.json'
         and {} before each test
         """
-        FileStorage._FileStorage__file_path = 'file.json'
-        FileStorage._FileStorage__objects = {}
+        FileStorage.__file_path = 'file.json'
+        FileStorage.__objects = {}
 
     def test_class_method(self):
         """Test that FileStorage methods existance"""
@@ -77,7 +77,6 @@ class Test_File_Storage(TestCase):
 
     def test_docstring(self):
         """Test Module, Class, and methods all have a docstring"""
-        self.assertIsNot(file_storage.__doc__, None)
         self.assertIsNot(FileStorage.__doc__, None)
         self.assertIsNot(FileStorage.all.__doc__, None)
         self.assertIsNot(FileStorage.new.__doc__, None)
@@ -89,8 +88,8 @@ class Test_File_Storage(TestCase):
 
         storage = FileStorage()
         self.assertIsInstance(storage, FileStorage)
-        self.assertEqual(FileStorage._FileStorage__file_path, 'file.json')
-        self.assertEqual(FileStorage._FileStorage__objects, {})
+        self.assertEqual(FileStorage.__file_path, 'file.json')
+        self.assertEqual(FileStorage.__objects, {})
 
     def new(self, obj):
         """Test method `new`"""
@@ -165,7 +164,7 @@ class Test_File_Storage(TestCase):
         place = Place()
         self.assertIsInstance(storage.all(), dict)
         self.assertEqual(storage.all()[
-            place.__class__.__name__+'.'+place.id], pl)
+            place.__class__.__name__+'.'+place.id], place)
 
         review = Review()
         self.assertIsInstance(storage.all(), dict)
@@ -255,69 +254,68 @@ class Test_File_Storage(TestCase):
         bm = BaseModel()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects
-                              [bm.__class__.__name__+'.'+bm.id], BaseModel)
-        self.assertEqual(FileStorage._FileStorage__objects
-                         [bm.__class__.__name__+'.'+bm.id].to_dict(),
-                         bm.to_dict())
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage._FileStorage__objects[
+            bm.__class__.__name__+'.'+bm.id], BaseModel)
+        self.assertEqual(FileStorage._FileStorage__objects[
+            bm.__class__.__name__+'.'+bm.id].to_dict(), bm.to_dict())
 
         user = User()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage.__objects
                               [user.__class__.__name__+'.'+user.id], User)
-        self.assertEqual(FileStorage._FileStorage__objects
+        self.assertEqual(FileStorage.__objects
                          [user.__class__.__name__+'.'+user.id].to_dict(),
                          user.to_dict())
 
         state = State()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage.__objects
                               [state.__class__.__name__+'.'+state.id], State)
-        self.assertEqual(FileStorage._FileStorage__objects
+        self.assertEqual(FileStorage.__objects
                          [state.__class__.__name__+'.'+state.id].to_dict(),
                          state.to_dict())
 
         city = City()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage.__objects
                               [city.__class__.__name__+'.'+city.id], City)
-        self.assertEqual(FileStorage._FileStorage__objects
+        self.assertEqual(FileStorage.__objects
                          [city.__class__.__name__+'.'+city.id].to_dict(),
                          city.to_dict())
 
         amenity = Amenity()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects[
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage.__objects[
             amenity.__class__.__name__+'.'+amenity.id], Amenity)
-        self.assertEqual(FileStorage._FileStorage__objects[
+        self.assertEqual(FileStorage.__objects[
             amenity.__class__.__name__+'.'+amenity.id].to_dict(),
             amenity.to_dict())
 
         place = Place()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects[
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage.__objects[
             place.__class__.__name__+'.'+place.id], Place)
-        self.assertEqual(FileStorage._FileStorage__objects[
+        self.assertEqual(FileStorage.__objects[
             place.__class__.__name__+'.'+place.id].to_dict(),
             place.to_dict())
 
         review = Review()
         storage.save()
         storage.reload()
-        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
-        self.assertIsInstance(FileStorage._FileStorage__objects[
+        self.assertIsInstance(FileStorage.__objects, dict)
+        self.assertIsInstance(FileStorage.__objects[
             review.__class__.__name__+'.'+review.id], Review)
-        self.assertEqual(FileStorage._FileStorage__objects[
+        self.assertEqual(FileStorage.__objects[
             reiview.__class__.__name__+'.'+review.id].to_dict(),
             review.to_dict())
