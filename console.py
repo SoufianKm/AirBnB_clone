@@ -182,6 +182,16 @@ class HBNBCommand(cmd.Cmd):
         storage.new(instance)
         storage.save()
 
+    def do_count(self, args):
+        """ return how many instances are for the specified class """
+        n = 0
+        dic = storage.all()
+        cla = args.split()[0]
+        for k in dic.keys():
+            if k.split('.')[0] == cla:
+                n += 1
+        print(n)
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
