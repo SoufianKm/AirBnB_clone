@@ -60,10 +60,10 @@ class FileStorage():
         try:
             with open(self.__file_path, mode='r') as f:
                 dicts = json.load(f)
-                for key, value in dicts.items():
-                    class_name = key.split('.')[0]
-                    my_obj = eval(class_name)(**value)
-                    self.new(my_obj)
+                for obj in dicts.values():
+                    class_name = obj["__class__"]
+                    del obj["__class__"]
+                    self.new(eval(class_name)(**obj))
         except (FileNotFoundError, PermissionError):
             return
 
