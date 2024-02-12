@@ -64,17 +64,17 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         length = len(args)
         if not arg:
-                print("** class name missing **")
-                return
+            print("** class name missing **")
+            return
         elif args[0] not in HBNBCommand.class_list:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif length == 1:
-           print("** instance id missing **")                
+            print("** instance id missing **")
         elif args[0]+'.'+args[1] not in storage.all().keys():
             print("** no instance found **")
         else:
             print(storage.all()[args[0]+'.'+args[1]])
-    
+
     def do_destroy(self, arg):
         """Delete an instance given a class and an id"""
         args = arg.split()
@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """
         Updates an instance based on the class name and id
-        
+
         Usage:
             update <class name> <id> <attribute name> \"<attribute value>\"
         """
