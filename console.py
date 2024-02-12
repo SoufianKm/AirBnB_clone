@@ -42,12 +42,14 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         line_list = line.split()
-        if '.' not in line_list[0]:
+        try:
+            if '.' not in line_list[0]:
+                return line
+        except IndexError:
             return line
         arg1 = line_list[0].split('.')[0]
         command = line_list[0].split('.')[1].split('(')[0]
-        args_list = line.\
-            split('.')[1].split('(')[1].split(')')[0].split(',')
+        args_list = line.split('.')[1].split('(')[1].split(')')[0].split(',')
         print(args_list)
         try:
             for i in range(len(args_list)):
