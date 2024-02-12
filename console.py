@@ -40,6 +40,19 @@ class HBNBCommand(cmd.Cmd):
         """Overwriting the default one"""
         pass
 
+    def precmd(self, line):
+        line_list = line.split()
+        if '.' not in line_list[0]:
+            return line
+        arg1 = line_list[0].split('.')[0]
+        command = line_list[0].split('.')[1].split('(')[0]
+        arg2 = line_list[0].split('.')[1].split('(')[1].split(')')[0]
+        try:
+            arg2 = arg2.split('"')[1]
+        except IndexError:
+            pass
+        return "{} {} {}".format(command, arg1, arg2)
+
     def do_create(self, arg):
         """Creates a new instance and stores it in JSON file"""
         args = arg.split()
