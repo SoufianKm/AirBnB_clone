@@ -46,12 +46,18 @@ class HBNBCommand(cmd.Cmd):
             return line
         arg1 = line_list[0].split('.')[0]
         command = line_list[0].split('.')[1].split('(')[0]
-        arg2 = line_list[0].split('.')[1].split('(')[1].split(')')[0]
+        args_list = line.\
+            split('.')[1].split('(')[1].split(')')[0].split(',')
+        print(args_list)
         try:
-            arg2 = arg2.split('"')[1]
+            for i in range(len(args_list)):
+                args_list[i] = args_list[i].split('"')[1]
         except IndexError:
             pass
-        return "{} {} {}".format(command, arg1, arg2)
+        arg2 = ' '.join(args_list)
+        nline = "{} {} {}".format(command, arg1, arg2)
+        print(nline)
+        return nline
 
     def do_create(self, arg):
         """Creates a new instance and stores it in JSON file"""
