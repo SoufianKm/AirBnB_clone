@@ -41,52 +41,33 @@
 .popover {
 	display: none;
 	background-color: #FAFAFA;
-	width: 85%;
+	width: 90%;
 	border: 1px solid #DDDDDD;
 	border-radius: 4px;
-	list-style-type: none;
-	padding-left: 15%;
-}
-
-.locations .popover li ul, .amenities .popover ul {
 	list-style-type: none;
 	padding-left: 10%;
 }
 
-.locations .popover li {
-	margin-top: 10%;
-	margin-bottom: 15%;
+.sublist {
+	list-style-type: none;
+	margin-bottom: 10%
 }
 
-
-.amenities .popover li {
-	margin-top: 2%;
-	margin-bottom: 2%;
-}
-
-
-.locations .popover li ul li{
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-.locations:hover .popover {
-	display: block;
-	position: relative;
-	z-index: 100;
+.amenities ul {
 	padding-top: 5%;
+	padding-bottom: 5%;
+}
+.locations li, .amenities li {
+	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
-.amenities:hover .popover {
+.locations:hover .popover, .amenities:hover .popover {
 	display: block;
 	position: relative;
 	z-index: 100;
-	padding-top: 13%;
-	padding-block: 13%;
 }
 
 .popover h2 {
 	font-size: 16px;
-	margin-top: 0;
-	margin-bottom: 0;
 }
